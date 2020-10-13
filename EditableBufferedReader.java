@@ -11,13 +11,13 @@ public class EditableBufferedReader extends BufferedReader {
     static final int CARRIAGE_RETURN = 13;
     static final int ESC = 27;
 
-    static final int CERO = 48;
     static final int TWO = 50;
     static final int THREE = 51;
     static final int C = 67;
     static final int D = 68;
     static final int F = 70;
     static final int H = 72;
+    static final int O = 79;
 
     static final int BRACKET = 91;
     static final int TILDE = 126;
@@ -58,8 +58,8 @@ public class EditableBufferedReader extends BufferedReader {
     /*
      * Cursor Right -> ESC [ C
      * Cursor Left -> ESC [ D
-     * HOME -> ESC 0 H
-     * END -> ESC 0 F
+     * HOME -> ESC O H
+     * END -> ESC O F
      * INSERT -> ESC [ 2 ~
      * SUPR -> ESC [ 3 ~
      *
@@ -69,17 +69,6 @@ public class EditableBufferedReader extends BufferedReader {
         int r = super.read();
         if (r == ESC) {
             r = super.read();
-            if (r == CERO) {
-                r = super.read();
-                switch (r) {
-                    case H:
-                        return HOME;
-                    case F:
-                        return END;
-                    default:
-                        break;
-                }
-            }
             if (r == BRACKET) {
                 r = super.read();
                 switch (r) {
@@ -87,6 +76,10 @@ public class EditableBufferedReader extends BufferedReader {
                         return RIGHT_ARROW;
                     case D:
                         return LEFT_ARROW;
+                    case H:
+                        return HOME;
+                    case F:
+                        return END;
                     case THREE:
                         r = super.read();
                         if(r == TILDE){
@@ -131,10 +124,10 @@ public class EditableBufferedReader extends BufferedReader {
                     str = line.delChar();
                     break;
                 case HOME:
-                    line.goHome();
+                    line.home();
                     break;
                 case END:
-                    line.goEnd();
+                    line.end();
                     break;
                 case SUPR:
                     str = line.suprChar();
