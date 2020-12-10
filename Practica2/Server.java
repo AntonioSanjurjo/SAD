@@ -7,7 +7,7 @@ import java.util.Random;
 public class Server {
 
     public static void main(String[] args) throws IOException{
-
+        // Arguments: port
         MyServerSocket serverSocket = new MyServerSocket(Integer.parseInt(args[0]));
         Map<String,MySocket> users = new ConcurrentHashMap<>();
         Map<String,MySocket> color = new ConcurrentHashMap<>();
