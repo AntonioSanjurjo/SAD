@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 public class Client {
 
     public static void main(String[] args){
-
+        // Arguments: ip(localhost), port , Name
         MySocket sc = new MySocket(args[0], Integer.parseInt(args[1]));
         String nickname = args[2];
         Boolean nickUsed = false;
